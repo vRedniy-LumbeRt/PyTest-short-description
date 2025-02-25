@@ -8,7 +8,6 @@ Pytest - современная библиотека тестирования py
 3. Наличие функционала параметризации 
 4. Автоматическое обнаружение написанных тестов без необходимости писать дополнительное ПО для запуска 
 5. Возможность использования фикстур
-6. Тестирование ошибок
 ***
 
 ### Простота установки и начала работы
@@ -28,7 +27,7 @@ import pytest
 PyTest:
 
 ```python
-def add(a, b):
+def add(a: int, b: int) -> int:
     return a + b
 
 def test_add():
@@ -42,7 +41,7 @@ GTest:
 ```python
 import unittest
 
-def add(a, b):
+def add(a: int, b: int) -> int:
     return a + b
 
 class TestAddFunction(unittest.TestCase):
@@ -67,12 +66,12 @@ PyTest требует значительно меньше кода для дос
 1. **Параметризация теста**
 
 ```python
-@pytest.mark.parametrize("input_val,expected", [
+@pytest.mark.parametrize("input,expected", [
     ("hello", 5),
     ("world", 5),
     ("pytest", 6)
 ])
-def test_length(input_val, expected):
+def test_length(input_val: str, expected: int):
     assert len(input_val) == expected
 ```
 
@@ -84,17 +83,19 @@ def test_length(input_val, expected):
 
 ```python
 @pytest.fixture
-def numbers():
+def numbers() -> list:
     return [1, 2, 3]
 
-def test_length(numbers):
+
+def test_length_2(numbers: list):
     assert len(numbers) == 3
 
-def test_sum(numbers):
+
+def test_sum(numbers: list):
     assert sum(numbers) == 6
 ```
 
-Данный пример создает список чисел **один раз** с помощью фикстуры и использует его в обоих тестах (таже фикстура позволяет не делать обычный вызов функции). 
+Данный пример создает список чисел один раз с помощью фикстуры и использует его в обоих тестах (таже фикстура позволяет не делать обычный вызов функции). 
 
 Фикстура предпочтительна, когда:
 
@@ -108,7 +109,7 @@ def test_sum(numbers):
 Тестирование исключений позволяет проверять, что код правильно обрабатывает ошибки и исключения, делая приложение более надёжным.
 
 ```python
-def divide(a, b):
+def divide(a: int, b: int) -> float:
     if b == 0:
         raise ZeroDivisionError("Нельзя делить на ноль!")
     return a / b
