@@ -72,8 +72,8 @@ PyTest требует значительно меньше кода для дос
     ("world", 5),
     ("pytest", 6)
 ])
-def test_length(input, expected):
-    assert len(input) == expected
+def test_length(input_val, expected):
+    assert len(input_val) == expected
 ```
 
 Данная технология позволяет запускать один и тот же тест с разными наборами данных, уменьшая дублирование кода и увеличивая покрытие тестами (т.е. нет необходимости писать множество маленьких тестов или строк с assert).
