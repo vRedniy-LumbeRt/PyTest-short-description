@@ -67,7 +67,7 @@ PyTest требует значительно меньше кода для дос
 1. **Параметризация теста**
 
 ```python
-@pytest.mark.parametrize("input,expected", [
+@pytest.mark.parametrize("input_val,expected", [
     ("hello", 5),
     ("world", 5),
     ("pytest", 6)
